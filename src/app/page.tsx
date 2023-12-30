@@ -1,7 +1,9 @@
 'use client'
 
 import { Link } from '@chakra-ui/next-js'
-import { Button, Center, Text } from '@chakra-ui/react'
+import { Button, Center, Text, AlertProps } from '@chakra-ui/react'
+
+interface A {}
 
 export default function Home() {
   return (
