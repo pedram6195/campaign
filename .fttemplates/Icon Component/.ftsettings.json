@@ -1,0 +1,4 @@
+{
+  "omitParentDirectory": true,
+  "openFilesWhenDone": ["[FTName % camelcase]Icon.tsx"]
+}
