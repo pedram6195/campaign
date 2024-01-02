@@ -12,7 +12,7 @@ const UploadFile: FC<IUploadFileProps> = (props) => {
 
   return (
     <Flex
-      h="3rem"
+      h={{ base: '2.25rem', lg: '3rem' }}
       bg="white"
       rounded="base"
       border="1px solid"
@@ -24,19 +24,24 @@ const UploadFile: FC<IUploadFileProps> = (props) => {
       shadow={isInvalid ? '0 0 0 1px #DE350B' : undefined}
       _hover={{ borderColor: isInvalid ? 'red.500' : 'gray.300' }}
     >
-      <chakra.span color={fileName ? 'neutral.400' : 'neutral.100'} fontWeight="normal" userSelect="none">
+      <chakra.span
+        color={fileName ? 'neutral.400' : 'neutral.100'}
+        fontWeight="normal"
+        fontSize={{ base: 'sm', lg: 'md' }}
+        userSelect="none"
+      >
         {fileName || 'بارگذاری رزومه'}
       </chakra.span>
       <chakra.label
         htmlFor="file"
         cursor={loading ? 'auto' : 'pointer'}
         w="7.5rem"
-        h="1.75rem"
+        h={{ base: '1.5rem', lg: '1.75rem' }}
         bg="green.500"
         color="white"
         rounded="base"
         px="3"
-        fontSize={loading ? 'xs' : 'sm'}
+        fontSize={{ base: 'xs', lg: loading ? 'xs' : 'sm' }}
         fontWeight="medium"
         display="flex"
         alignItems="center"
