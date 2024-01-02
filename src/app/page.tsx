@@ -21,9 +21,10 @@ import NextImage from 'next/image'
 import { useEffect } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import cloudMobile from '../../public/cloud-mobile.svg'
-import cloud from '../../public/cloud.png'
-import hero from '../../public/landing2.png'
-import logo from '../../public/logo.png'
+import cloud from '../../public/cloud.svg'
+import hero from '../../public/hero.png'
+import heroMobile from '../../public/hero-mobile.png'
+import logo from '../../public/logo.svg'
 
 const Select = dynamic(() => import('chakra-react-select').then(({ Select }) => Select), { ssr: false })
 
@@ -119,7 +120,12 @@ export default function Landing() {
                   animation={`${bounce} 1.5s infinite`}
                 />
               </Show>
-              <Image as={NextImage} alt="landing-hero" src={hero} priority transform={{ lg: 'translateX(-15%)' }} />
+              <Show above="lg">
+                <Image as={NextImage} alt="landing-hero" src={hero} priority transform={{ lg: 'translateX(-15%)' }} />
+              </Show>
+              <Show below="lg">
+                <Image as={NextImage} alt="landing-hero" src={heroMobile} priority mx="auto" />
+              </Show>
             </Box>
           </Flex>
           <chakra.form
