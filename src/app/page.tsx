@@ -112,13 +112,14 @@ export default function Landing() {
               as="h3"
               color="neutral.200"
               fontWeight="normal"
-              fontSize={{ base: 'sm', xl: 'xl' }}
+              fontSize={{ base: 'sm', xl: 'lg' }}
               lineHeight="1.8">
               رزومه‌ خود را در دیدرس برترین کارفرمایان قرار دهید.{' '}
               <chakra.b fontWeight="medium">لازم نیست رزومه جدیدی بسازید</chakra.b>. اگر سابقه کاری کمی دارید ولی به
               مهارت‌های خود اطمینان دارید، با <chakra.b fontWeight="medium">آزمون‌های شغلی رایگان</chakra.b>،
-              توانمندی‌هایتان را به کارفرمایان نشان دهید. با ارسال رزومه ثبت نام کنید. مهارت‌های خود را آنلاین بسنجید.
-              شانس خود را برای دیده شدن افزایش دهید و مشغول به کار شوید.
+              توانمندی‌هایتان را به کارفرمایان نشان دهید.
+              <br /> با ارسال رزومه ثبت نام کنید. مهارت‌های خود را آنلاین بسنجید. شانس خود را برای دیده شدن افزایش دهید
+              و مشغول به کار شوید.
             </Heading>
             <Box alignSelf={{ lg: 'flex-end' }} mt="auto" position="relative" w="full">
               <Show above="lg">
