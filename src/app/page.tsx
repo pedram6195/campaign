@@ -61,8 +61,7 @@ export default function Landing() {
     <Flex
       h={isSmallHeight ? 'auto' : '100dvh'}
       bg="white"
-      overflow={{ base: undefined, lg: isSmallHeight ? undefined : 'hidden' }}
-    >
+      overflow={{ base: undefined, lg: isSmallHeight ? undefined : 'hidden' }}>
       <Box
         w="3.5rem"
         minH="full"
@@ -86,8 +85,7 @@ export default function Landing() {
             w={{ lg: '50%' }}
             alignSelf="stretch"
             ps={{ base: '5', lg: '8%' }}
-            pe={{ base: '5', lg: '3%' }}
-          >
+            pe={{ base: '5', lg: '3%' }}>
             <Heading as="h1" color="neutral.300" fontWeight="semibold" fontSize={{ base: '2xl', '2xl': '5xl' }}>
               استخدام بی‌سابقه
             </Heading>
@@ -97,8 +95,7 @@ export default function Landing() {
               fontWeight="medium"
               fontSize={{ base: 'xs', '2xl': '1.375rem' }}
               mb="5"
-              mt="1"
-            >
+              mt="1">
               مهارتتان را به رخ بکشید
             </Heading>
             <Heading
@@ -106,8 +103,7 @@ export default function Landing() {
               color="neutral.200"
               fontWeight="normal"
               fontSize={{ base: 'sm', xl: 'xl' }}
-              lineHeight="1.8"
-            >
+              lineHeight="1.8">
               ما رزومه‌های شما را در دیدرس برترین کارفرمایان ایران قرار می‌دهیم.{' '}
               <chakra.b fontWeight="medium">لازم نیست رزومه جدیدی بسازید</chakra.b>. کافیست رزومه آماده خود را ارسال
               کنید. حتی اگر سابقه کاری ندارید با <chakra.b fontWeight="medium">آزمون‌های شغلی رایگان</chakra.b>{' '}
@@ -134,8 +130,7 @@ export default function Landing() {
                     align="center"
                     fontSize="sm"
                     fontWeight="semibold"
-                    mb="2"
-                  >
+                    mb="2">
                     همین الان ثبت‌نام کنید؛
                     <br /> به زودی مشغول به کار خواهید شد.
                   </Text>
@@ -167,8 +162,7 @@ export default function Landing() {
             flexDirection="column"
             w={{ lg: '50%' }}
             ps={{ base: '5', lg: '6%' }}
-            pe={{ base: '5', lg: '10%' }}
-          >
+            pe={{ base: '5', lg: '10%' }}>
             <Flex direction="column" gap="4" pt={{ lg: '8rem' }}>
               <FormControl isInvalid={!!errors.fullName}>
                 <Input
@@ -307,8 +301,7 @@ export default function Landing() {
               }}
               transition="all 500ms"
               fontWeight={{ base: 'normal', lg: 'semibold' }}
-              _hover={{ transform: 'scale(1.025)' }}
-            >
+              _hover={{ transform: 'scale(1.025)' }}>
               ارسال اطلاعات
             </Button>
           </chakra.form>
