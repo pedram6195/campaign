@@ -6,14 +6,17 @@ import { Image } from '@chakra-ui/next-js'
 import {
   Box,
   Button,
+  Center,
   Flex,
   FormControl,
   FormErrorMessage,
   Heading,
   Input,
   Show,
+  Text,
   chakra,
   keyframes,
+  useMediaQuery,
 } from '@chakra-ui/react'
 import { chakraComponents } from 'chakra-react-select'
 import dynamic from 'next/dynamic'
@@ -23,7 +26,6 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import cloudMobile from '../../public/cloud-mobile.svg'
 import cloud from '../../public/cloud.svg'
 import hero from '../../public/hero.png'
-import heroMobile from '../../public/hero-mobile.png'
 import logo from '../../public/logo.svg'
 
 const Select = dynamic(() => import('chakra-react-select').then(({ Select }) => Select), { ssr: false })
@@ -53,26 +55,35 @@ export default function Landing() {
     register('resume', { ...requiredKey })
   })
 
+  const [isSmallHeight] = useMediaQuery('(min-width: 992px) and (max-height: 786px)', {
+    ssr: true,
+    fallback: false,
+  })
+
   return (
-    <Flex h="100dvh" bg="white" overflow={{ base: undefined, lg: 'hidden' }}>
+    <Flex
+      h={isSmallHeight ? 'auto' : '100dvh'}
+      bg="white"
+      overflow={{ base: undefined, lg: isSmallHeight ? undefined : 'hidden' }}
+    >
       <Box
         w="3.5rem"
-        h="full"
+        minH="full"
         bg="linear-gradient(180deg, #0747A6 0%, #FFFAE6 91.43%)"
         flexShrink="0"
         display={{ base: 'none', lg: 'block' }}
       />
-      <Flex direction="column" flexGrow="1">
+      <Flex direction="column" flexGrow="1" h="full">
         <Image
           as={NextImage}
           alt="joboffer-logo"
           src={logo}
-          m={{ base: '1.25rem 0 0.5rem 1.25rem', lg: '2rem 0 3rem 2rem' }}
+          m={{ base: '1.25rem 0 0.5rem 1.25rem', lg: isSmallHeight ? '2rem 0 1rem 2rem' : '2rem 0 3rem 2rem' }}
           alignSelf="flex-end"
           w={{ base: '100px', lg: 'auto' }}
         />
 
-        <Flex direction={{ base: 'column', lg: 'row' }}>
+        <Flex direction={{ base: 'column', lg: 'row' }} flexGrow="1">
           <Flex
             direction="column"
             w={{ lg: '50%' }}
@@ -97,7 +108,7 @@ export default function Landing() {
               as="h3"
               color="neutral.200"
               fontWeight="normal"
-              fontSize={{ base: 'sm', lg: 'xl' }}
+              fontSize={{ base: 'sm', xl: 'xl' }}
               lineHeight="1.8"
             >
               ما رزومه‌های شما را در دیدرس برترین کارفرمایان ایران قرار می‌دهیم.{' '}
@@ -107,25 +118,49 @@ export default function Landing() {
             </Heading>
             <Box alignSelf={{ lg: 'flex-end' }} mt="auto" position="relative" w="full">
               <Show above="lg">
-                <Image as={NextImage} alt="register-right-now" src={cloud} priority position="absolute" top="1.5rem" />
+                <Center position="absolute" top="1.5rem" w="230px" h="170px">
+                  <Image as={NextImage} alt="register-right-now" src={cloud} priority fill />
+                  <Text position="relative" zIndex="1" color="white" fontWeight="semibold" mb="4">
+                    همین الان ثبت‌نام کنید؛
+                    <br /> به زودی مشغول به کار
+                    <br /> خواهید شد.
+                  </Text>
+                </Center>
               </Show>
               <Show below="lg">
-                <Image as={NextImage} alt="register-right-now" src={cloudMobile} priority mx="auto" mt="5" />
-                <ArrowDownIcon
-                  position="absolute"
-                  color="green.500"
-                  boxSize="5"
-                  left="8"
-                  top="140px"
-                  animation={`${bounce} 1.5s infinite`}
-                />
+                <Center position="relative" mt="5" h="100px">
+                  <Image as={NextImage} alt="register-right-now" src={cloudMobile} priority fill />
+                  <Text
+                    position="relative"
+                    zIndex="1"
+                    color="white"
+                    align="center"
+                    fontSize="sm"
+                    fontWeight="semibold"
+                    mb="2"
+                  >
+                    همین الان ثبت‌نام کنید؛
+                    <br /> به زودی مشغول به کار خواهید شد.
+                  </Text>
+                  <ArrowDownIcon
+                    position="absolute"
+                    color="green.500"
+                    boxSize="5"
+                    left="8"
+                    top="120px"
+                    animation={`${bounce} 1.5s infinite`}
+                  />
+                </Center>
               </Show>
-              <Show above="lg">
-                <Image as={NextImage} alt="landing-hero" src={hero} priority transform={{ lg: 'translateX(-15%)' }} />
-              </Show>
-              <Show below="lg">
-                <Image as={NextImage} alt="landing-hero" src={heroMobile} priority mx="auto" />
-              </Show>
+              <Image
+                as={NextImage}
+                alt="landing-hero"
+                src={hero}
+                priority
+                transform={{ lg: 'translateX(-15%)' }}
+                w={{ base: '75%', lg: 'auto' }}
+                mx={{ base: 'auto', lg: '0' }}
+              />
             </Box>
           </Flex>
           <chakra.form
@@ -265,7 +300,7 @@ export default function Landing() {
             </Flex>
             <Button
               mt={{ base: '5', lg: '3.75rem' }}
-              mb={{ base: '10', lg: '0' }}
+              mb={{ base: '20', lg: '0' }}
               size={{ base: 'sm', lg: 'lg' }}
               type="submit"
               bg="blue.600"
