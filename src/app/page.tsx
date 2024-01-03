@@ -18,8 +18,7 @@ import {
   keyframes,
   useMediaQuery,
 } from '@chakra-ui/react'
-import { chakraComponents } from 'chakra-react-select'
-import dynamic from 'next/dynamic'
+import { Select, chakraComponents } from 'chakra-react-select'
 import NextImage from 'next/image'
 import { useEffect } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
@@ -27,8 +26,6 @@ import cloudMobile from '../../public/cloud-mobile.svg'
 import cloud from '../../public/cloud.svg'
 import hero from '../../public/hero.png'
 import logo from '../../public/logo.svg'
-
-const Select = dynamic(() => import('chakra-react-select').then(({ Select }) => Select), { ssr: false })
 
 type FormInputs = {
   fullName: string
@@ -197,8 +194,8 @@ export default function Landing() {
                       {...rest}
                       dir="ltr"
                       onChange={(e) => {
-                        const value = toEnDigit(e.target.value)
-                        value.replace(/[^\d]/g, '')
+                        let value = toEnDigit(e.target.value)
+                        value = value.replace(/[^\d]/g, '')
                         onChange(value)
                       }}
                       placeholder="شماره تلفن همراه"
