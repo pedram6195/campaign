@@ -33,6 +33,7 @@ type FormInputs = {
   email: string
   category: { label: string; value: string }
   resume: string
+  experience: { label: string; value: string }
 }
 
 export default function Landing() {
@@ -42,7 +43,13 @@ export default function Landing() {
     control,
     setValue,
     formState: { errors },
-  } = useForm<FormInputs>({ defaultValues: { phoneNumber: '' } })
+  } = useForm<FormInputs>({
+    defaultValues: {
+      phoneNumber: '',
+      experience: { label: 'سابقه کاری: یکسال یا کمتر', value: '1' },
+      category: { label: 'موقعیت شغلی: کارشناس فروش', value: '2' },
+    },
+  })
 
   const onSubmit: SubmitHandler<FormInputs> = (values) => {
     alert(JSON.stringify(values, null, 2))
@@ -52,10 +59,13 @@ export default function Landing() {
     register('resume', { ...requiredKey })
   })
 
-  const [isSmallHeight] = useMediaQuery('(min-width: 992px) and (max-height: 786px)', {
-    ssr: true,
-    fallback: false,
-  })
+  const [isSmallHeight, isSmallHeightMobile] = useMediaQuery(
+    ['(min-width: 992px) and (max-height: 786px)', '(max-width: 991px) and (max-height: 667px)'],
+    {
+      ssr: true,
+      fallback: false,
+    }
+  )
 
   return (
     <Flex
@@ -104,10 +114,11 @@ export default function Landing() {
               fontWeight="normal"
               fontSize={{ base: 'sm', xl: 'xl' }}
               lineHeight="1.8">
-              ما رزومه‌های شما را در دیدرس برترین کارفرمایان ایران قرار می‌دهیم.{' '}
-              <chakra.b fontWeight="medium">لازم نیست رزومه جدیدی بسازید</chakra.b>. کافیست رزومه آماده خود را ارسال
-              کنید. حتی اگر سابقه کاری ندارید با <chakra.b fontWeight="medium">آزمون‌های شغلی رایگان</chakra.b>{' '}
-              توانایی‌هایتان را بسنجید و پیش از مصاحبه شغلی توانمندی‌تان را به کارفرمایان نشان دهید.
+              رزومه‌ خود را در دیدرس برترین کارفرمایان قرار دهید.{' '}
+              <chakra.b fontWeight="medium">لازم نیست رزومه جدیدی بسازید</chakra.b>. اگر سابقه کاری کمی دارید ولی به
+              مهارت‌های خود اطمینان دارید، با <chakra.b fontWeight="medium">آزمون‌های شغلی رایگان</chakra.b>،
+              توانمندی‌هایتان را به کارفرمایان نشان دهید. با ارسال رزومه ثبت نام کنید. مهارت‌های خود را آنلاین بسنجید.
+              شانس خود را برای دیده شدن افزایش دهید و مشغول به کار شوید.
             </Heading>
             <Box alignSelf={{ lg: 'flex-end' }} mt="auto" position="relative" w="full">
               <Show above="lg">
@@ -121,7 +132,7 @@ export default function Landing() {
                 </Center>
               </Show>
               <Show below="lg">
-                <Center position="relative" mt="5" h="100px">
+                <Center position="relative" mt="5" h="100px" mb={isSmallHeightMobile ? '6' : '0'}>
                   <Image as={NextImage} alt="register-right-now" src={cloudMobile} priority fill />
                   <Text
                     position="relative"
@@ -134,25 +145,29 @@ export default function Landing() {
                     همین الان ثبت‌نام کنید؛
                     <br /> به زودی مشغول به کار خواهید شد.
                   </Text>
-                  <ArrowDownIcon
-                    position="absolute"
-                    color="green.500"
-                    boxSize="5"
-                    left="8"
-                    top="120px"
-                    animation={`${bounce} 1.5s infinite`}
-                  />
+                  {!isSmallHeightMobile && (
+                    <ArrowDownIcon
+                      position="absolute"
+                      color="green.500"
+                      boxSize="5"
+                      left="8"
+                      top="120px"
+                      animation={`${bounce} 1.5s infinite`}
+                    />
+                  )}
                 </Center>
               </Show>
-              <Image
-                as={NextImage}
-                alt="landing-hero"
-                src={hero}
-                priority
-                transform={{ lg: 'translateX(-15%)' }}
-                w={{ base: '75%', lg: 'auto' }}
-                mx={{ base: 'auto', lg: '0' }}
-              />
+              {!isSmallHeightMobile && (
+                <Image
+                  as={NextImage}
+                  alt="landing-hero"
+                  src={hero}
+                  priority
+                  transform={{ lg: 'translateX(-15%)' }}
+                  w={{ base: '75%', lg: 'auto' }}
+                  mx={{ base: 'auto', lg: '0' }}
+                />
+              )}
             </Box>
           </Flex>
           <chakra.form
@@ -226,6 +241,61 @@ export default function Landing() {
                 />
                 <FormErrorMessage fontSize={{ base: 'xs', lg: 'md' }}>{errors.email?.message}</FormErrorMessage>
               </FormControl>
+
+              <Controller
+                name="experience"
+                control={control}
+                rules={{ ...requiredKey }}
+                render={({ field: { ref, ...rest } }) => (
+                  <FormControl isInvalid={!!errors.experience}>
+                    <Select
+                      {...rest}
+                      placeholder="سابقه کاری"
+                      size={{ base: 'md', lg: 'lg' }}
+                      options={experiences}
+                      isSearchable={false}
+                      components={{
+                        DropdownIndicator: (props) => (
+                          <chakraComponents.DropdownIndicator {...props}>
+                            <ChevronDownIcon color="deepBlack.600" boxSize={{ base: '5', lg: '6' }} />
+                          </chakraComponents.DropdownIndicator>
+                        ),
+                      }}
+                      chakraStyles={{
+                        control: (prev) => ({
+                          ...prev,
+                          minH: { base: '2.25rem', lg: '3rem' },
+                          h: { base: '2.25rem', lg: '3rem' },
+                        }),
+                        placeholder: (prev) => ({
+                          ...prev,
+                          ...inputStyles,
+                          color: 'neutral.100',
+                        }),
+                        option: (prev) => ({
+                          ...prev,
+                          ...inputStyles,
+                        }),
+                        singleValue: (prev) => ({
+                          ...prev,
+                          ...inputStyles,
+                        }),
+                        dropdownIndicator: (prev) => ({
+                          ...prev,
+                          bg: 'transparent',
+                        }),
+                        indicatorSeparator: (prev) => ({
+                          ...prev,
+                          opacity: 0,
+                        }),
+                      }}
+                    />
+                    <FormErrorMessage fontSize={{ base: 'xs', lg: 'md' }}>
+                      {errors.experience?.message}
+                    </FormErrorMessage>
+                  </FormControl>
+                )}
+              />
               <Controller
                 name="category"
                 control={control}
@@ -278,7 +348,6 @@ export default function Landing() {
                   </FormControl>
                 )}
               />
-
               <FormControl isInvalid={!!errors.resume}>
                 <UploadFile
                   afterUpload={(id) => {
@@ -312,10 +381,20 @@ export default function Landing() {
 }
 
 const options = [
-  { label: 'مدیر فروش', value: '1' },
-  { label: 'کارشناس فروش', value: '2' },
-  { label: 'دیجیتال مارکتینگ', value: '3' },
-  { label: 'حسابداری', value: '4' },
+  { label: 'موقعیت شغلی: مدیر فروش', value: '1' },
+  { label: 'موقعیت شغلی: کارشناس فروش', value: '2' },
+  { label: 'موقعیت شغلی: دیجیتال مارکتینگ', value: '3' },
+  { label: 'موقعیت شغلی: حسابداری', value: '4' },
+]
+
+const experiences = [
+  { label: 'سابقه کاری: یکسال یا کمتر', value: '1' },
+  { label: 'سابقه کاری: دو سال', value: '2' },
+  { label: 'سابقه کاری: سه سال', value: '3' },
+  { label: 'سابقه کاری: چهار سال', value: '4' },
+  { label: 'سابقه کاری: پنج سال', value: '5' },
+  { label: 'سابقه کاری: پنج تا ده سال', value: '6' },
+  { label: 'سابقه کاری: بیشتر از ده سال', value: '7' },
 ]
 
 const inputStyles = {
