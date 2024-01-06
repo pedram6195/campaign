@@ -1,17 +1,16 @@
 'use client'
 
-import { bounce } from '@/app/page.const'
+import { bounce, isSmallHeightMobile } from '@/app/page.const'
 import { ArrowDownIcon } from '@/components/icons'
 import { Image } from '@chakra-ui/next-js'
-import { Box, Center, Flex, Heading, Show, Text, chakra } from '@chakra-ui/react'
+import { Box, Center, Flex, Heading, Text, chakra } from '@chakra-ui/react'
 import NextImage from 'next/image'
-import React, { FC } from 'react'
+import React from 'react'
 import cloudMobile from '../../../../public/cloud-mobile.svg'
 import cloud from '../../../../public/cloud.svg'
 import hero from '../../../../public/hero.png'
-import { IIntroductionProps } from './Introduction.types.d'
 
-const Introduction: FC<IIntroductionProps> = ({ isSmallHeightMobile }) => {
+const Introduction = () => {
   return (
     <Flex
       direction="column"
@@ -34,53 +33,48 @@ const Introduction: FC<IIntroductionProps> = ({ isSmallHeightMobile }) => {
         مشغول به کار شوید.
       </Heading>
       <Box alignSelf={{ lg: 'flex-end' }} mt="auto" position="relative" w="full">
-        <Show above="lg">
-          <Center position="absolute" top="1.5rem" w="230px" h="170px">
-            <Image as={NextImage} alt="register-right-now" src={cloud} priority fill />
-            <Text position="relative" zIndex="1" color="white" fontWeight="semibold" mb="4">
-              همین الان ثبت‌نام کنید؛
-              <br /> به زودی مشغول به کار
-              <br /> خواهید شد.
-            </Text>
-          </Center>
-        </Show>
-        <Show below="lg">
-          <Center position="relative" mt="5" h="100px" mb={isSmallHeightMobile ? '6' : '0'}>
-            <Image as={NextImage} alt="register-right-now" src={cloudMobile} priority fill />
-            <Text
-              position="relative"
-              zIndex="1"
-              color="white"
-              align="center"
-              fontSize="sm"
-              fontWeight="semibold"
-              mb="2">
-              همین الان ثبت‌نام کنید؛
-              <br /> به زودی مشغول به کار خواهید شد.
-            </Text>
-            {!isSmallHeightMobile && (
-              <ArrowDownIcon
-                position="absolute"
-                color="green.500"
-                boxSize="5"
-                left="8"
-                top="120px"
-                animation={`${bounce} 1.5s infinite`}
-              />
-            )}
-          </Center>
-        </Show>
-        {!isSmallHeightMobile && (
-          <Image
-            as={NextImage}
-            alt="landing-hero"
-            src={hero}
-            priority
-            transform={{ lg: 'translateX(-15%)' }}
-            w={{ base: '75%', lg: 'auto' }}
-            mx={{ base: 'auto', lg: '0' }}
+        <Center position="absolute" top="1.5rem" w="230px" h="170px" display={{ base: 'none', lg: 'flex' }}>
+          <Image as={NextImage} alt="register-right-now" src={cloud} priority fill />
+          <Text position="relative" zIndex="1" color="white" fontWeight="semibold" mb="4">
+            همین الان ثبت‌نام کنید؛
+            <br /> به زودی مشغول به کار
+            <br /> خواهید شد.
+          </Text>
+        </Center>
+
+        <Center
+          display={{ base: 'flex', lg: 'none' }}
+          position="relative"
+          mt="5"
+          h="100px"
+          sx={{ [isSmallHeightMobile]: { mb: 6 } }}>
+          <Image as={NextImage} alt="register-right-now" src={cloudMobile} priority fill />
+          <Text position="relative" zIndex="1" color="white" align="center" fontSize="sm" fontWeight="semibold" mb="2">
+            همین الان ثبت‌نام کنید؛
+            <br /> به زودی مشغول به کار خواهید شد.
+          </Text>
+
+          <ArrowDownIcon
+            position="absolute"
+            color="green.500"
+            boxSize="5"
+            left="8"
+            top="120px"
+            animation={`${bounce} 1.5s infinite`}
+            sx={{ [isSmallHeightMobile]: { display: 'none' } }}
           />
-        )}
+        </Center>
+
+        <Image
+          as={NextImage}
+          alt="landing-hero"
+          src={hero}
+          priority
+          transform={{ lg: 'translateX(-15%)' }}
+          w={{ base: '75%', lg: 'auto' }}
+          mx={{ base: 'auto', lg: '0' }}
+          sx={{ [isSmallHeightMobile]: { display: 'none' } }}
+        />
       </Box>
     </Flex>
   )

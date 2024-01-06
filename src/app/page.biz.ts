@@ -1,4 +1,3 @@
-import { useMediaQuery } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { requiredKey } from './page.const'
@@ -21,15 +20,7 @@ const useLanding = () => {
     methods.register('resume', { ...requiredKey })
   })
 
-  const [isSmallHeight, isSmallHeightMobile] = useMediaQuery(
-    ['(min-width: 992px) and (max-height: 786px)', '(max-width: 991px) and (max-height: 667px)'],
-    {
-      ssr: true,
-      fallback: false,
-    }
-  )
-
-  return { methods, onSubmit, isSmallHeight, isSmallHeightMobile }
+  return { methods, onSubmit }
 }
 
 export default useLanding

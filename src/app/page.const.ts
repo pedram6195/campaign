@@ -35,3 +35,7 @@ export const bounce = keyframes({
   '40%': { transform: ' translateY(-30px)' },
   '60%': { transform: 'translateY(-15px)' },
 })
+
+export const isSmallHeight = '@media (min-width: 992px) and (max-height: 786px)'
+
+export const isSmallHeightMobile = '(max-width: 991px) and (max-height: 667px)'

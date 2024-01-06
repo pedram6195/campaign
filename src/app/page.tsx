@@ -15,19 +15,21 @@ import {
   SubmitButton,
 } from './components'
 import useLanding from './page.biz'
+import { isSmallHeight } from './page.const'
 
 export default function Landing() {
-  const { methods, onSubmit, isSmallHeight, isSmallHeightMobile } = useLanding()
+  const { methods, onSubmit } = useLanding()
   return (
     <Flex
-      h={isSmallHeight ? 'auto' : '100dvh'}
+      h="100dvh"
       bg="white"
-      overflow={{ base: undefined, lg: isSmallHeight ? undefined : 'hidden' }}>
+      overflowY={{ lg: 'hidden' }}
+      sx={{ [isSmallHeight]: { h: 'auto', overflowY: 'visible' } }}>
       <BlueBox />
       <Flex direction="column" flexGrow="1" h="full">
-        <Logo isSmallHeight={isSmallHeight} />
+        <Logo />
         <Flex direction={{ base: 'column', lg: 'row' }} flexGrow="1">
-          <Introduction isSmallHeightMobile={isSmallHeightMobile} />
+          <Introduction />
           <FormProvider {...methods}>
             <chakra.form
               onSubmit={methods.handleSubmit(onSubmit)}
