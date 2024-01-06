@@ -17,21 +17,23 @@ export default function Success() {
           alignItems="center"
           alignSelf="center"
           position="relative"
-          w={{ base: '90%', lg: '55%' }}
+          w={{ base: 'full', lg: '60%' }}
           pt="4"
-          pb="16"
-          border="1px solid"
-          borderColor="blue.700"
-          rounded="5rem">
+          pb={{ base: 8, lg: 16 }}
+          px={{ base: '5', lg: '0' }}
+          border={{ lg: '1px solid' }}
+          borderColor={{ lg: 'blue.700' }}
+          rounded={{ lg: '5rem' }}>
           <Box
+            display={{ base: 'none', lg: 'block' }}
             w="0"
             h="0"
-            borderTop="100px solid"
+            borderTop="75px solid"
             borderTopColor="blue.700"
-            borderRight="100px solid"
+            borderRight="75px solid"
             borderRightColor="transparent"
             position="absolute"
-            bottom="-100px"
+            bottom="-75px"
             left="6rem"
             _before={{
               content: "''",
@@ -39,15 +41,21 @@ export default function Success() {
               h: '0px',
               zIndex: 1,
               position: 'absolute',
-              borderTop: '99px solid',
+              borderTop: '74px solid',
               borderTopColor: 'white',
-              borderRight: '98px solid',
+              borderRight: '73px solid',
               borderRightColor: 'transparent',
               bottom: '2px',
               left: '1px',
             }}
           />
-          <Lottie animationData={check} loop={0} style={{ width: 200, height: 200 }} />
+          <Box w="140px" h="140px" display={{ lg: 'none' }}>
+            <Lottie animationData={check} loop={0} style={{ width: 140, height: 140 }} />
+          </Box>
+
+          <Box w="200px" h="200px" display={{ base: 'none', lg: 'block' }}>
+            <Lottie animationData={check} loop={0} style={{ width: 200, height: 200 }} />
+          </Box>
 
           <Box
             fontSize={{ base: 'sm', lg: 'md' }}
@@ -70,6 +78,7 @@ export default function Success() {
           <Button
             w="60%"
             mb="8"
+            rounded={{ base: 'lg', lg: 'xl' }}
             size={{ base: 'sm', lg: 'lg' }}
             bg="blue.600"
             shadow="0px 4px 8px 0px rgba(0, 0, 0, 0.20)"
@@ -78,7 +87,7 @@ export default function Success() {
             _hover={{ transform: { lg: 'scale(1.025)' } }}>
             لینک آزمون
           </Button>
-          <Text color="neutral.300" fontSize="md" fontWeight="medium">
+          <Text color="neutral.300" fontSize={{ base: 'xs', lg: 'md' }} fontWeight="medium" align="center">
             در صورتی که الان امکان شرکت در آزمون را ندارید، لینک این آزمون برای آدرس ایمیل شما هم ارسال شده است.
           </Text>
         </Flex>
