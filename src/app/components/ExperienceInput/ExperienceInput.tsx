@@ -38,6 +38,7 @@ const ExperienceInput = () => {
                 ...prev,
                 minH: { base: '2.25rem', lg: '3rem' },
                 h: { base: '2.25rem', lg: '3rem' },
+                borderColor: 'gray.200',
               }),
               placeholder: (prev) => ({
                 ...prev,

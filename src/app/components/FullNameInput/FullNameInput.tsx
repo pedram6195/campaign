@@ -19,6 +19,7 @@ const FullNameInput = () => {
         size={{ base: 'md', lg: 'lg' }}
         h={{ base: '2.25rem', lg: '3rem' }}
         autoComplete="off"
+        _placeholder={{ color: 'gray.500' }}
         {...inputStyles}
       />
       <FormErrorMessage fontSize={{ base: 'xs', lg: 'md' }}>

@@ -21,6 +21,7 @@ export const inputStyles = {
   color: 'neutral.600',
   fontSize: { base: 'sm', lg: 'md' },
   fontWeight: 'normal',
+  borderColor: 'gray.200',
 }
 
 export const requiredKey = {

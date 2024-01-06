@@ -33,7 +33,7 @@ const PhoneNumberInput = () => {
             size={{ base: 'md', lg: 'lg' }}
             h={{ base: '2.25rem', lg: '3rem' }}
             autoComplete="off"
-            _placeholder={{ textAlign: 'right' }}
+            _placeholder={{ textAlign: 'right', color: 'gray.500' }}
             type="tel"
             pattern="[0-9]*"
             inputMode="numeric"

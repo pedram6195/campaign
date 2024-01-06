@@ -13,6 +13,7 @@ export default function Success() {
         <Logo />
 
         <Flex
+          id="action-submit"
           direction="column"
           alignItems="center"
           alignSelf="center"
