@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -8,6 +9,7 @@ import { FormInputs } from './page.types'
 const useLanding = () => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const toast = useToast()
 
   const methods = useForm<FormInputs>({
     defaultValues: {
@@ -32,6 +34,12 @@ const useLanding = () => {
       .then((res) => {
         const { fullName, invitedUrl } = res.data
         router.push(`/success?invitedUrl=${encodeURI(invitedUrl)}&fullName=${fullName}`)
+      })
+      .catch((err) => {
+        toast({
+          status: 'error',
+          description: 'خطا از سمت سرور',
+        })
       })
       .finally(() => setLoading(false))
   }
