@@ -21,7 +21,7 @@ const Introduction = () => {
       <Heading as="h1" color="neutral.300" fontWeight="semibold" fontSize={{ base: '2xl', '2xl': '5xl' }}>
         استخدام بی‌سابقه
       </Heading>
-      <Heading as="h2" color="green.500" fontWeight="medium" fontSize={{ base: 'xs', '2xl': '1.375rem' }} mb="5" mt="1">
+      <Heading as="h2" color="green.500" fontWeight="medium" fontSize={{ base: 'xs', '2xl': '1.375rem' }} mb="4" mt="2">
         مهارتتان را به رخ بکشید
       </Heading>
       <Heading as="h3" color="neutral.200" fontWeight="normal" fontSize={{ base: 'sm', xl: 'lg' }} lineHeight="1.8">
@@ -45,7 +45,6 @@ const Introduction = () => {
         <Center
           display={{ base: 'flex', lg: 'none' }}
           position="relative"
-          mt="5"
           h="100px"
           sx={{ [isSmallHeightMobile]: { mb: 6 } }}>
           <Image as={NextImage} alt="register-right-now" src={cloudMobile} priority fill />
@@ -70,8 +69,9 @@ const Introduction = () => {
           alt="landing-hero"
           src={hero}
           priority
+          quality={100}
           transform={{ lg: 'translateX(-15%)' }}
-          w={{ base: '75%', lg: 'auto' }}
+          w={{ base: '70%', lg: 'auto' }}
           mx={{ base: 'auto', lg: '0' }}
           sx={{ [isSmallHeightMobile]: { display: 'none' } }}
         />
