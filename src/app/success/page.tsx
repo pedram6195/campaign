@@ -1,11 +1,25 @@
 'use client'
 
+import { Link } from '@chakra-ui/next-js'
 import { Box, Button, Flex, ListItem, Text, UnorderedList } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 import check from '../../../public/check.json'
 import { BlueBox, Logo } from '../components'
 
 export default function Success() {
+  const router = useRouter()
+  const search = useSearchParams()
+  const fullName = search.get('fullName')!
+  const invitedUrl = search.get('invitedUrl')!
+
+  useEffect(() => {
+    if (!fullName || !invitedUrl) router.push('/')
+  }, [fullName, invitedUrl, router])
+
+  if (!fullName || !invitedUrl) return null
+
   return (
     <Flex h="100dvh">
       <BlueBox />
@@ -66,8 +80,8 @@ export default function Success() {
             color="neutral.400"
             lineHeight="1.6"
             mb="8">
-            فرزاد زمان‌پور عزیز <br /> رزومه شما دریافت شد و در اختیار کارفرمایان قرار خواهد گرفت. از مشارکت شما متشکریم
-            و امیدواریم بتوانیم در یافتن شغل جدید به شما کمک کنیم. پیشنهاد میکنیم با کلیک بر روی لینک زیر در آزمون مرتبط
+            {fullName} عزیز <br /> رزومه شما دریافت شد و در اختیار کارفرمایان قرار خواهد گرفت. از مشارکت شما متشکریم و
+            امیدواریم بتوانیم در یافتن شغل جدید به شما کمک کنیم. پیشنهاد میکنیم با کلیک بر روی لینک زیر در آزمون مرتبط
             با رشته خود شرکت کنید و
             <br />
             <UnorderedList>
@@ -77,6 +91,8 @@ export default function Success() {
             </UnorderedList>
           </Box>
           <Button
+            as={Link}
+            href={invitedUrl}
             w="60%"
             mb="8"
             rounded={{ base: 'lg', lg: 'xl' }}

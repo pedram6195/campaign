@@ -18,7 +18,7 @@ import useLanding from './page.biz'
 import { isSmallHeight } from './page.const'
 
 export default function Landing() {
-  const { methods, onSubmit } = useLanding()
+  const { methods, onSubmit, loading } = useLanding()
   return (
     <Flex
       h="100dvh"
@@ -47,7 +47,7 @@ export default function Landing() {
                 <CategoryInput />
                 <ResumeInput />
               </Flex>
-              <SubmitButton />
+              <SubmitButton loading={loading} />
             </chakra.form>
           </FormProvider>
         </Flex>

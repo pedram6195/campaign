@@ -1,12 +1,15 @@
 'use client'
 
 import { Button } from '@chakra-ui/react'
-import React from 'react'
+import React, { FC } from 'react'
+import { ISubmitButtonProps } from './SubmitButton.types'
 
-const SubmitButton = () => {
+const SubmitButton: FC<ISubmitButtonProps> = ({ loading }) => {
   return (
     <Button
       type="submit"
+      isLoading={loading}
+      isDisabled={loading}
       mt={{ base: '5', lg: '3.75rem' }}
       mb={{ base: '20', lg: '0' }}
       size={{ base: 'sm', lg: 'lg' }}
