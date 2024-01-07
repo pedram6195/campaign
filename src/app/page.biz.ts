@@ -31,7 +31,7 @@ const useLanding = () => {
       })
       .then((res) => {
         const { fullName, invitedUrl } = res.data
-        router.push(`/success?invitedUrl=${invitedUrl}&fullName=${fullName}`)
+        router.push(`/success?invitedUrl=${encodeURI(invitedUrl)}&fullName=${fullName}`)
       })
       .finally(() => setLoading(false))
   }
