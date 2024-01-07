@@ -4,7 +4,7 @@ export const jobs = [
   { label: 'موقعیت شغلی: مدیر فروش', value: '88aa644c-7cee-4663-a6fe-f14a7a61414d' },
   { label: 'موقعیت شغلی: کارشناس فروش', value: '8cf096bd-71d6-475a-8336-6c8c7ff383fc' },
   { label: 'موقعیت شغلی: دیجیتال مارکتینگ', value: 'cbd252cb-10fa-449c-a8c8-25132e222fd8' },
-  { label: 'موقعیت شغلی: حسابداری', value: 'd1e7b622-83c5-4e62-bbfe-c81b160b1009' },
+  { label: 'موقعیت شغلی: حسابدار', value: 'd1e7b622-83c5-4e62-bbfe-c81b160b1009' },
 ]
 
 export const experiences = [
