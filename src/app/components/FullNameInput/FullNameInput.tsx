@@ -14,7 +14,10 @@ const FullNameInput = () => {
   return (
     <FormControl isInvalid={!!errors.fullName}>
       <Input
-        {...register('fullName', { ...requiredKey })}
+        {...register('fullName', {
+          ...requiredKey,
+          pattern: { value: /^[\u0600-\u06FF\s]+$/, message: 'لطفا فقط حروف فارسی وارد کنید.' },
+        })}
         placeholder="نام و نام خانوادگی"
         size={{ base: 'md', lg: 'lg' }}
         h={{ base: '2.25rem', lg: '3rem' }}
