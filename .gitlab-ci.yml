@@ -1,0 +1,29 @@
+stages:
+    - DeployProduction
+
+default:
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - ssh-add <(echo "$PRIVATE_KEY")
+    - ssh-add <(echo "$PROD_PRIVATE_KEY")
+    - export dssh="ssh -o StrictHostKeyChecking=no $SSH_USER@$DEV_SERVER"
+    - export pssh="ssh -o StrictHostKeyChecking=no $SSH_USER@$PROD_SERVER"
+
+DeployProduction:
+    stage: DeployProduction
+    only:
+        - master
+    script:
+        # deploy dev stage with ssh for graphql schema
+        - export APPNAME=joboffer-campaign
+        - export DOCKER_FILE=docker-compose.yml
+        - docker-compose build
+        - docker-compose push
+        - scp $DOCKER_FILE Dockerfile $SSH_USER@$PROD_SERVER:/home/$SSH_USER
+        - $pssh "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
+        - $pssh "export CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE && docker-compose pull $APPNAME"
+        - $pssh "export CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE && docker-compose -f $DOCKER_FILE  up -d $APPNAME"
