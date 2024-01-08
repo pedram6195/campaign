@@ -39,4 +39,4 @@ export const bounce = keyframes({
 
 export const isSmallHeight = '@media (min-width: 992px) and (max-height: 786px)'
 
-export const isSmallHeightMobile = '(max-width: 991px) and (max-height: 667px)'
+export const isSmallHeightMobile = '@media (max-width: 991px) and (max-height: 667px)'
